@@ -1,11 +1,11 @@
 {
-	"name": "@jbx-protocol/contracts-v1",
+	"name": "@loverush/contracts-v1",
 	"bugs": {
-		"url": "https://github.com/jbx-protocol/juice-contracts-v1/issues"
+		"url": "https://github.com/loverush/MuDao-contracts-v1/issues"
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/jbx-protocol/juice-contracts-v1/"
+		"url": "https://github.com/loverush/MuDao-contracts-v1/"
 	},
 	"version": "0.0.1",
 	"license": "MIT",
@@ -31,7 +31,7 @@
 		"hardhat-deploy-ethers": "^0.3.0-beta.10",
 		"prettier": "^2.4.0"
 	},
-	"homepage": "https://github.com/jbx-protocol",
+	"homepage": "https://github.com/loverush",
 	"keywords": [
 		"blockchain",
 		"erc20",
