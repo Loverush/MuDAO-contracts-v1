@@ -2,7 +2,7 @@
   A funding cycle configuration can have a duration of 0. This makes the cycle last forever, and allows it to be reconfigurable at any time.
 */
 
-// The currency will be 0, which corresponds to ETH, preventing the need for currency price conversion.
+// The currency will be 0, which corresponds to BNB, preventing the need for currency price conversion.
 const currency = 0;
 
 // Expect the first funding cycle to be based on the 0th funding cycle.

@@ -7,7 +7,7 @@
    - All funds will migrate to the new terminal for users to tap and redeem tickets on.
 */
 
-// The currency will be 0, which corresponds to ETH, preventing the need for currency price conversion.
+// The currency will be 0, which corresponds to BNB, preventing the need for currency price conversion.
 const currency = 0;
 
 export default [
@@ -197,7 +197,7 @@ export default [
 					ticketBeneficiary.address,
 					expectedProjectId,
 					portionOfRedeemableTicketsOfTicketBeneficiary,
-					0, // must be lower than the expected amount of ETH that is being claimed.
+					0, // must be lower than the expected amount of BNB that is being claimed.
 					redeemBeneficiary,
 					randomBoolFn(),
 				],
@@ -409,7 +409,7 @@ export default [
 					ticketBeneficiary.address,
 					expectedProjectId,
 					leftoverRedeemableTicketsOfTicketBeneficiary,
-					0, // must be lower than the expected amount of ETH that is being claimed.
+					0, // must be lower than the expected amount of BNB that is being claimed.
 					randomAddressFn(),
 					randomBoolFn(),
 				],
@@ -431,7 +431,7 @@ export default [
 					owner.address,
 					expectedProjectId,
 					reservedTicketAmount,
-					0, // must be lower than the expected amount of ETH that is being claimed.
+					0, // must be lower than the expected amount of BNB that is being claimed.
 					randomAddressFn(),
 					randomBoolFn(),
 				],

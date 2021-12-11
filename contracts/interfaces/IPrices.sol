@@ -12,7 +12,7 @@ interface IPrices {
 
 	function feedFor(uint256 _currency) external returns (AggregatorV3Interface);
 
-	function getETHPriceFor(uint256 _currency) external view returns (uint256);
+	function getBNBPriceFor(uint256 _currency) external view returns (uint256);
 
 	function addFeed(AggregatorV3Interface _priceFeed, uint256 _currency) external;
 }

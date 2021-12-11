@@ -17,5 +17,5 @@ export default function () {
 
 	// Test each function.
 	describe('addFeed(...)', addFeed);
-	describe('getETHPriceFor(...)', getEthPriceFor);
+	describe('getBNBPriceFor(...)', getEthPriceFor);
 }

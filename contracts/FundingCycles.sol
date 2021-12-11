@@ -213,7 +213,7 @@ contract FundingCycles is TerminalUtility, IFundingCycles {
         @param _projectId The ID of the project being reconfigured.
         @param _properties The funding cycle configuration.
           @dev _properties.target The amount that the project wants to receive in each funding cycle. 18 decimals.
-          @dev _properties.currency The currency of the `_target`. Send 0 for ETH or 1 for USD.
+          @dev _properties.currency The currency of the `_target`. Send 0 for BNB or 1 for USD.
           @dev _properties.duration The duration of the funding cycle for which the `_target` amount is needed. Measured in days. 
             Set to 0 for no expiry and to be able to reconfigure anytime.
           @dev _cycleLimit The number of cycles that this configuration should last for before going back to the last permanent. This does nothing for a project's first funding cycle.

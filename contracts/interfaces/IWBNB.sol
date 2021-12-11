@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.6;
 
-interface IWETH {
+interface IWBNB {
 	function decimals() external view returns (uint256);
 
 	function deposit() external payable;

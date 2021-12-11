@@ -4,7 +4,7 @@ import { expect } from 'chai';
 const tests = {
 	success: [
 		{
-			description: 'check ETH price, non-zero currency, 18 decimals',
+			description: 'check BNB price, non-zero currency, 18 decimals',
 			fn: ({ deployer }) => ({
 				caller: deployer,
 				currency: 1,
@@ -13,7 +13,7 @@ const tests = {
 			}),
 		},
 		{
-			description: 'check ETH price, non-zero currency, 0 decimals',
+			description: 'check BNB price, non-zero currency, 0 decimals',
 			fn: ({ deployer }) => ({
 				caller: deployer,
 				currency: 1,
@@ -22,7 +22,7 @@ const tests = {
 			}),
 		},
 		{
-			description: 'check ETH price, zero currency',
+			description: 'check BNB price, zero currency',
 			fn: ({ deployer }) => ({
 				caller: deployer,
 				currency: 0,
@@ -38,7 +38,7 @@ const tests = {
 				currency: 1,
 				decimals: 18,
 				price: 400,
-				revert: 'Prices::getETHPrice: NOT_FOUND',
+				revert: 'Prices::getBNBPrice: NOT_FOUND',
 			}),
 		},
 	],
@@ -62,7 +62,7 @@ export default function () {
 				}
 
 				// Check for the price.
-				const resultingPrice = await this.contract.connect(caller).getETHPriceFor(currency);
+				const resultingPrice = await this.contract.connect(caller).getBNBPriceFor(currency);
 
 				// Get a reference to the target number of decimals.
 				const targetDecimals = await this.contract.targetDecimals();
@@ -84,7 +84,7 @@ export default function () {
 
 				await this.aggregatorV3Contract.mock.latestRoundData.returns(0, price, 0, 0, 0);
 
-				await expect(this.contract.connect(caller).getETHPriceFor(currency)).to.be.revertedWith(revert);
+				await expect(this.contract.connect(caller).getBNBPriceFor(currency)).to.be.revertedWith(revert);
 			});
 		});
 	});

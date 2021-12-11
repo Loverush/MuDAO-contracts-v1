@@ -1,11 +1,11 @@
 {
-	"name": "@loverush/contracts-v1",
+	"name": "@loverush/daohub-contracts-v1",
 	"bugs": {
-		"url": "https://github.com/loverush/MuDao-contracts-v1/issues"
+		"url": "https://github.com/loverush/Daohub-contracts-v1/issues"
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/loverush/MuDao-contracts-v1/"
+		"url": "https://github.com/loverush/Daohub-contracts-v1/"
 	},
 	"version": "0.0.1",
 	"license": "MIT",

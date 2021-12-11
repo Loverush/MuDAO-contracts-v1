@@ -9,33 +9,33 @@ import '@paulrberg/contracts/math/PRBMath.sol';
 import './interfaces/IYielder.sol';
 import './interfaces/ITerminalV1.sol';
 import './interfaces/IyVaultV2.sol';
-import './interfaces/IWETH.sol';
+import './interfaces/IWBNB.sol';
 
 contract YearnYielder is IYielder, Ownable {
 	using SafeERC20 for IERC20;
 
-	IyVaultV2 public wethVault = IyVaultV2(0xa9fE4601811213c340e850ea305481afF02f5b28);
+	IyVaultV2 public wbnbVault = IyVaultV2(0xa9fE4601811213c340e850ea305481afF02f5b28);
 
-	address public weth;
+	address public wbnb;
 
 	uint256 public override deposited = 0;
 
 	uint256 public decimals;
 
-	constructor(address _weth) {
-		require(wethVault.token() == _weth, 'YearnYielder: INCOMPATIBLE');
-		weth = _weth;
-		decimals = IWETH(weth).decimals();
+	constructor(address _wbnb) {
+		require(wbnbVault.token() == _wbnb, 'YearnYielder: INCOMPATIBLE');
+		wbnb = _wbnb;
+		decimals = IWBNB(wbnb).decimals();
 		updateApproval();
 	}
 
 	function getCurrentBalance() public view override returns (uint256) {
-		return _sharesToTokens(wethVault.balanceOf(address(this)));
+		return _sharesToTokens(wbnbVault.balanceOf(address(this)));
 	}
 
 	function deposit() external payable override onlyOwner {
-		IWETH(weth).deposit{value: msg.value}();
-		wethVault.deposit(msg.value);
+		IWBNB(wbnb).deposit{value: msg.value}();
+		wbnbVault.deposit(msg.value);
 		deposited = deposited + msg.value;
 	}
 
@@ -44,10 +44,10 @@ contract YearnYielder is IYielder, Ownable {
 		deposited = deposited - PRBMath.mulDiv(_amount, deposited, getCurrentBalance());
 
 		// Withdraw the amount of tokens from the vault.
-		wethVault.withdraw(_tokensToShares(_amount));
+		wbnbVault.withdraw(_tokensToShares(_amount));
 
-		// Convert weth back to eth.
-		IWETH(weth).withdraw(_amount);
+		// Convert wbnb back to eth.
+		IWBNB(wbnb).withdraw(_amount);
 
 		// Move the funds to the TerminalV1.
 		_beneficiary.transfer(_amount);
@@ -60,7 +60,7 @@ contract YearnYielder is IYielder, Ownable {
 
 	/// @dev Updates the vaults approval of the token to be the maximum value.
 	function updateApproval() public {
-		IERC20(weth).safeApprove(address(wethVault), type(uint256).max);
+		IERC20(wbnb).safeApprove(address(wbnbVault), type(uint256).max);
 	}
 
 	/// @dev Computes the number of tokens an amount of shares is worth.
@@ -69,7 +69,7 @@ contract YearnYielder is IYielder, Ownable {
 	///
 	/// @return the number of tokens the shares are worth.
 	function _sharesToTokens(uint256 _sharesAmount) private view returns (uint256) {
-		return PRBMath.mulDiv(_sharesAmount, wethVault.pricePerShare(), 10**decimals);
+		return PRBMath.mulDiv(_sharesAmount, wbnbVault.pricePerShare(), 10**decimals);
 	}
 
 	/// @dev Computes the number of shares an amount of tokens is worth.
@@ -78,6 +78,6 @@ contract YearnYielder is IYielder, Ownable {
 	///
 	/// @return the number of shares the tokens are worth.
 	function _tokensToShares(uint256 _tokensAmount) private view returns (uint256) {
-		return PRBMath.mulDiv(_tokensAmount, 10**decimals, wethVault.pricePerShare());
+		return PRBMath.mulDiv(_tokensAmount, 10**decimals, wbnbVault.pricePerShare());
 	}
 }

@@ -95,7 +95,7 @@ async function main() {
 	const Governance = await deployContractFn('Governance', [1, TerminalDirectory.address]);
 	console.log('Governance: ', Governance.address);
 	await Prices.transferOwnership(Governance.address);
-	const priceFeed = '0x0567F2323251f0Aab15c8dFb1967E4e8A7D42aeE';
+	const priceFeed = '0x0567F2323251f0Aab15c8dFb1967E4e8A7D42aeE'; // BNB-USE price feed
 	await Governance.addPriceFeed(Prices.address, priceFeed, 1);
 	await Governance.transferOwnership(multisig);
 
@@ -116,6 +116,9 @@ async function main() {
 	const FundingCycles = await deployContractFn('FundingCycles', [TerminalDirectory.address]);
 	console.log('FundingCycles: ', FundingCycles.address);
 
+	const Ballot7Days = await deployContractFn('Active7DaysFundingCycleBallot', []);
+	const Ballot3Days = await deployContractFn('Active3DaysFundingCycleBallot', []);
+
 	const TerminalV1 = await deployContractFn('TerminalV1', [
 		Projects.address,
 		FundingCycles.address,
@@ -128,27 +131,28 @@ async function main() {
 	]);
 	console.log('TerminalV1: ', TerminalV1.address);
 
-	// const ProxyPaymentAddressManager = await deployContractFn('ProxypaymentAddressManager', [
-	// 	TerminalDirectory.address,
-	// 	TicketBooth.address,
-	// ]);
+	const ProxyPaymentAddressManager = await deployContractFn('ProxypaymentAddressManager', [
+		TerminalDirectory.address,
+		TicketBooth.address,
+	]);
+	console.log('ProxyPaymentAddressManager: ', ProxyPaymentAddressManager.address);
 
 	await executeFn({
 		caller: deployer,
 		contract: TerminalV1,
 		fn: 'deploy',
 		args: [
-			deployer.address,
-			ethers.utils.formatBytes32String('MUDAO'),
+			multisig,
+			ethers.utils.formatBytes32String('Daohub'),
 			'',
 			{
-				target: BigNumber.from('19967000000000000000000'),
+				target: ethers.constants.MaxUint256,
 				currency: 1,
 				// Duration must be zero so that the same cycle lasts throughout the tests.
 				duration: BigNumber.from(30),
 				cycleLimit: 0,
 				discountRate: BigNumber.from(200),
-				ballot: ethers.constants.AddressZero, // 7tian todo
+				ballot: Ballot3Days.address, // 7tian todo
 			},
 			{
 				reservedRate: BigNumber.from(20),

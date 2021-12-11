@@ -4,7 +4,7 @@
   If approved, a the reconfigured funding cycle will take affect after the current funding cycle expires.
 */
 
-// The currency will be 0, which corresponds to ETH, preventing the need for currency price conversion.
+// The currency will be 0, which corresponds to BNB, preventing the need for currency price conversion.
 const currency = 0;
 
 // Expect the first funding cycle to be based on the 0th funding cycle.

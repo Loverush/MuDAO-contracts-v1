@@ -2,7 +2,7 @@
   A project can print premined tickets up until the point when a payment is made to it after its configured its first funding cycle.
 */
 
-// The currency will be 0, which corresponds to ETH.
+// The currency will be 0, which corresponds to BNB.
 const currency = 0;
 
 export default [
