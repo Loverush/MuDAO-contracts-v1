@@ -1,5 +1,5 @@
 {
-  "name": "@dao-hub/contracts-v1",
+  "name": "@loverush/daohub-contracts-v1",
   "bugs": {
     "url": "https://github.com/loverush/Daohub-contracts-v1/issues"
   },
@@ -17,8 +17,7 @@
     "ethers": "^5.4.6",
     "hardhat": "^2.6.7",
     "hardhat-deploy": "^0.9.1",
-    "hardhat-gas-reporter": "^1.0.4",
-    "prettier-plugin-solidity": "^1.0.0-beta.19"
+    "hardhat-gas-reporter": "^1.0.4"
   },
   "dependencies": {
     "@chainlink/contracts": "^0.1.6",
@@ -51,11 +50,14 @@
     "test:integration": "mocha -r esm --grep \"Integration\" --bail",
     "clean": "rimraf ./cache && rimraf ./artifacts",
     "compile": "yarn clean && hardhat compile",
-    "pretty": "prettier --write \"./**/*.{js,jsx,json,sol}\""
+    "pretty": "prettier --write \"./**/*.{js,jsx,json}\""
   },
   "main": "hardhat.config.js",
   "directories": {
     "test": "test"
   },
-  "author": "Roshan"
+  "author": "Roshan",
+  "publishConfig": {
+    "registry":"https://npm.pkg.github.com"
+  }
 }
