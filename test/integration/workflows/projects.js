@@ -412,7 +412,7 @@ export default [
 			// Burn the unused funding cycle ID.
 			incrementFundingCycleIdFn();
 
-			// The currency will be 0, which corresponds to ETH.
+			// The currency will be 0, which corresponds to BNB.
 			const currency = 0;
 			await executeFn({
 				caller: owner,

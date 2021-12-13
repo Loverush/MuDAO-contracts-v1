@@ -6,7 +6,7 @@ import '@openzeppelin/contracts/access/Ownable.sol';
 import './interfaces/IPrices.sol';
 
 /** 
-  @notice Manage and normalizes ETH price feeds.
+  @notice Manage and normalizes BNB price feeds.
 */
 contract Prices is IPrices, Ownable {
 	// --- public constant stored properties --- //
@@ -19,28 +19,28 @@ contract Prices is IPrices, Ownable {
 	/// @notice The number to multiply each price feed by to get to the target decimals.
 	mapping(uint256 => uint256) public override feedDecimalAdjuster;
 
-	/// @notice The available price feeds that can be used to get the price of ETH.
+	/// @notice The available price feeds that can be used to get the price of BNB.
 	mapping(uint256 => AggregatorV3Interface) public override feedFor;
 
 	// --- external views --- //
 
 	/** 
       @notice 
-      Gets the current price of ETH for the provided currency.
+      Gets the current price of BNB for the provided currency.
       
       @param _currency The currency to get a price for.
       
-      @return price The price of ETH with 18 decimals.
+      @return price The price of BNB with 18 decimals.
     */
-	function getETHPriceFor(uint256 _currency) external view override returns (uint256) {
-		// The 0 currency is ETH itself.
+	function getBNBPriceFor(uint256 _currency) external view override returns (uint256) {
+		// The 0 currency is BNB itself.
 		if (_currency == 0) return 10**targetDecimals;
 
 		// Get a reference to the feed.
 		AggregatorV3Interface _feed = feedFor[_currency];
 
 		// Feed must exist.
-		require(_feed != AggregatorV3Interface(address(0)), 'Prices::getETHPrice: NOT_FOUND');
+		require(_feed != AggregatorV3Interface(address(0)), 'Prices::getBNBPrice: NOT_FOUND');
 
 		// Get the lateset round information. Only need the price is needed.
 		(, int256 _price, , , ) = _feed.latestRoundData();
@@ -53,7 +53,7 @@ contract Prices is IPrices, Ownable {
 
 	/** 
       @notice 
-      Add a price feed for the price of ETH.
+      Add a price feed for the price of BNB.
 
       @dev
       Current feeds can't be modified.
@@ -62,7 +62,7 @@ contract Prices is IPrices, Ownable {
       @param _currency The currency that the price feed is for.
     */
 	function addFeed(AggregatorV3Interface _feed, uint256 _currency) external override onlyOwner {
-		// The 0 currency is reserved for ETH.
+		// The 0 currency is reserved for BNB.
 		require(_currency > 0, 'Prices::addFeed: RESERVED');
 
 		// There can't already be a feed for the specified currency.

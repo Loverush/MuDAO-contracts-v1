@@ -351,7 +351,7 @@ const ops =
 			}),
 			mockFn({
 				mockContract: mockContracts.prices,
-				fn: 'getETHPriceFor',
+				fn: 'getBNBPriceFor',
 				args: [currency],
 				returns: [ethPrice],
 			}),

@@ -43,7 +43,7 @@ export default [
 				max: paymentValue.div(4),
 			});
 
-			// The currency will be 0, which corresponds to ETH.
+			// The currency will be 0, which corresponds to BNB.
 			const currency = 0;
 
 			// Set a random percentage of tickets to reserve for the project owner.

@@ -72,7 +72,7 @@ contract TerminalV1 is Operatable, ITerminalV1, ITerminal, ReentrancyGuard {
 
 	// --- public stored properties --- //
 
-	/// @notice The amount of ETH that each project is responsible for.
+	/// @notice The amount of BNB that each project is responsible for.
 	mapping(uint256 => uint256) public override balanceOf;
 
 	/// @notice The percent fee the Juicebox project takes from tapped amounts. Out of 200.
@@ -281,7 +281,7 @@ contract TerminalV1 is Operatable, ITerminalV1, ITerminal, ReentrancyGuard {
       @param _uri A link to information about the project and this funding cycle.
       @param _properties The funding cycle configuration.
         @dev _properties.target The amount that the project wants to receive in this funding cycle. Sent as a wad.
-        @dev _properties.currency The currency of the `target`. Send 0 for ETH or 1 for USD.
+        @dev _properties.currency The currency of the `target`. Send 0 for BNB or 1 for USD.
         @dev _properties.duration The duration of the funding stage for which the `target` amount is needed. Measured in days. Send 0 for a boundless cycle reconfigurable at any time.
         @dev _properties.cycleLimit The number of cycles that this configuration should last for before going back to the last permanent. This has no effect for a project's first funding cycle.
         @dev _properties.discountRate A number from 0-200 indicating how valuable a contribution to this funding stage is compared to the project's previous funding stage.
@@ -341,7 +341,7 @@ contract TerminalV1 is Operatable, ITerminalV1, ITerminal, ReentrancyGuard {
       @param _projectId The ID of the project being reconfigured. 
       @param _properties The funding cycle configuration.
         @dev _properties.target The amount that the project wants to receive in this funding stage. Sent as a wad.
-        @dev _properties.currency The currency of the `target`. Send 0 for ETH or 1 for USD.
+        @dev _properties.currency The currency of the `target`. Send 0 for BNB or 1 for USD.
         @dev _properties.duration The duration of the funding stage for which the `target` amount is needed. Measured in days. Send 0 for a boundless cycle reconfigurable at any time.
         @dev _properties.cycleLimit The number of cycles that this configuration should last for before going back to the last permanent. This has no effect for a project's first funding cycle.
         @dev _properties.discountRate A number from 0-200 indicating how valuable a contribution to this funding stage is compared to the project's previous funding stage.
@@ -426,8 +426,8 @@ contract TerminalV1 is Operatable, ITerminalV1, ITerminal, ReentrancyGuard {
 		uint256 _weight = fundingCycles.BASE_WEIGHT();
 
 		// Get the current funding cycle to read the weight and currency from.
-		// Get the currency price of ETH.
-		uint256 _ethPrice = prices.getETHPriceFor(_currency);
+		// Get the currency price of BNB.
+		uint256 _ethPrice = prices.getBNBPriceFor(_currency);
 
 		// Multiply the amount by the funding cycle's weight to determine the amount of tickets to print.
 		uint256 _weightedAmount = PRBMathUD60x18.mul(PRBMathUD60x18.div(_amount, _ethPrice), _weight);
@@ -457,7 +457,7 @@ contract TerminalV1 is Operatable, ITerminalV1, ITerminal, ReentrancyGuard {
 
 	/**
       @notice 
-      Contribute ETH to a project.
+      Contribute BNB to a project.
 
       @dev 
       Print's the project's tickets proportional to the amount of the contribution.
@@ -517,11 +517,11 @@ contract TerminalV1 is Operatable, ITerminalV1, ITerminal, ReentrancyGuard {
 		require(_currency == _fundingCycle.currency, 'TerminalV1::tap: UNEXPECTED_CURRENCY');
 
 		// Get a reference to this project's current balance, including any earned yield.
-		// Get the currency price of ETH.
-		uint256 _ethPrice = prices.getETHPriceFor(_fundingCycle.currency);
+		// Get the currency price of BNB.
+		uint256 _ethPrice = prices.getBNBPriceFor(_fundingCycle.currency);
 
-		// Get the price of ETH.
-		// The amount of ETH that is being tapped.
+		// Get the price of BNB.
+		// The amount of BNB that is being tapped.
 		uint256 _tappedWeiAmount = PRBMathUD60x18.div(_amount, _ethPrice);
 
 		// The amount being tapped must be at least as much as was expected.
@@ -577,7 +577,7 @@ contract TerminalV1 is Operatable, ITerminalV1, ITerminal, ReentrancyGuard {
 
 	/**
       @notice 
-      Addresses can redeem their Tickets to claim the project's overflowed ETH.
+      Addresses can redeem their Tickets to claim the project's overflowed BNB.
 
       @dev
       Only a ticket's holder or a designated operator can redeem it.
@@ -586,10 +586,10 @@ contract TerminalV1 is Operatable, ITerminalV1, ITerminal, ReentrancyGuard {
       @param _projectId The ID of the project to which the Tickets being redeemed belong.
       @param _count The number of Tickets to redeem.
       @param _minReturnedWei The minimum amount of Wei expected in return.
-      @param _beneficiary The address to send the ETH to.
+      @param _beneficiary The address to send the BNB to.
       @param _preferUnstaked If the preference is to redeem tickets that have been converted to ERC-20s.
 
-      @return amount The amount of ETH that the tickets were redeemed for.
+      @return amount The amount of BNB that the tickets were redeemed for.
     */
 	function redeem(
 		address _account,
@@ -611,7 +611,7 @@ contract TerminalV1 is Operatable, ITerminalV1, ITerminal, ReentrancyGuard {
 		// Can't send claimed funds to the zero address.
 		require(_beneficiary != address(0), 'TerminalV1::redeem: ZERO_ADDRESS');
 
-		// The amount of ETH claimable by the message sender from the specified project by redeeming the specified number of tickets.
+		// The amount of BNB claimable by the message sender from the specified project by redeeming the specified number of tickets.
 		amount = claimableOverflowOf(_account, _projectId, _count);
 
 		// Nothing to do if the amount is 0.
@@ -872,7 +872,7 @@ contract TerminalV1 is Operatable, ITerminalV1, ITerminal, ReentrancyGuard {
 			uint256 _modCut = PRBMath.mulDiv(_amount, _mod.percent, 10000);
 
 			if (_modCut > 0) {
-				// Transfer ETH to the mod.
+				// Transfer BNB to the mod.
 				// If there's an allocator set, transfer to its `allocate` function.
 				if (_mod.allocator != IModAllocator(address(0))) {
 					_mod.allocator.allocate{value: _modCut}(_fundingCycle.projectId, _mod.projectId, _mod.beneficiary);
@@ -1021,20 +1021,20 @@ contract TerminalV1 is Operatable, ITerminalV1, ITerminal, ReentrancyGuard {
       Gets the amount overflowed in relation to the provided funding cycle.
 
       @dev
-      This amount changes as the price of ETH changes against the funding cycle's currency.
+      This amount changes as the price of BNB changes against the funding cycle's currency.
 
       @param _currentFundingCycle The ID of the funding cycle to base the overflow on.
 
       @return overflow The current overflow of funds.
     */
 	function _overflowFrom(FundingCycle memory _currentFundingCycle) private view returns (uint256) {
-		// Get the current price of ETH.
-		uint256 _ethPrice = prices.getETHPriceFor(_currentFundingCycle.currency);
+		// Get the current price of BNB.
+		uint256 _ethPrice = prices.getBNBPriceFor(_currentFundingCycle.currency);
 
 		// Get a reference to the amount still tappable in the current funding cycle.
 		uint256 _limit = _currentFundingCycle.target - _currentFundingCycle.tapped;
 
-		// The amount of ETH that the owner could currently still tap if its available. This amount isn't considered overflow.
+		// The amount of BNB that the owner could currently still tap if its available. This amount isn't considered overflow.
 		uint256 _ethLimit = _limit == 0 ? 0 : PRBMathUD60x18.div(_limit, _ethPrice);
 
 		// Get the current balance of the project.
@@ -1128,7 +1128,7 @@ contract TerminalV1 is Operatable, ITerminalV1, ITerminal, ReentrancyGuard {
 		address _beneficiary,
 		string memory _memo
 	) private returns (uint256 feeAmount) {
-		// The amount of ETH from the _tappedAmount to pay as a fee.
+		// The amount of BNB from the _tappedAmount to pay as a fee.
 		feeAmount = _from - PRBMath.mulDiv(_from, 200, _percent + 200);
 
 		// Nothing to do if there's no fee to take.

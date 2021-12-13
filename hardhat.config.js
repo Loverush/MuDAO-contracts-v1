@@ -22,14 +22,14 @@ module.exports = {
 			url: 'http://localhost:8545',
 		},
 		bsc: {
-			url: 'https://bsc-mainnet.web3api.com/v1/WFKT1AK5TMQRXQS9R9EQU21DXYDIYD4HTY',
+			url: 'https://bsc-mainnet.web3api.com/v1/' + process.env.WEB3API_ID,
 			chainId: 56,
 			gas: 2100000,
 			gasPrice: 50000000000,
 			accounts: [mnemonic()],
 		},
 		kovan: {
-			url: 'https://kovan.infura.io/v3/788f289cea4849e39a3dc28840eea608',
+			url: 'https://kovan.infura.io/v3/' + process.env.INFURA_ID,
 			chainId: 42,
 			gas: 2100000,
 			gasPrice: 50000000000,

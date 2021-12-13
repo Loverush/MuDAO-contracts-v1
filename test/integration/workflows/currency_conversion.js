@@ -1,9 +1,9 @@
 /** 
-  Funding cycles can use currencies other than ETH that Governance has added price feeds for.
+  Funding cycles can use currencies other than BNB that Governance has added price feeds for.
 
-  Funds are always paid in ETH, but a funding cycle target can be denominated in another currencency.
-  This means that the the amount of ETH that a project can withdraw will change over time as the price
-  of ETH changes compared to their funding cycle's denominated currency.
+  Funds are always paid in BNB, but a funding cycle target can be denominated in another currencency.
+  This means that the the amount of BNB that a project can withdraw will change over time as the price
+  of BNB changes compared to their funding cycle's denominated currency.
 
   This test makes sure the conversion rates are honored.
 */
@@ -12,12 +12,12 @@ export default [
 		description: 'Add the price feed to the prices contract',
 		fn: async ({ deployer, contracts, executeFn, deployContractFn, incrementCurrencyFn }) => {
 			// An example price feed.
-			const priceFeed = await deployContractFn('ExampleETHUSDPriceFeed');
+			const priceFeed = await deployContractFn('ExampleBNBUSDPriceFeed');
 			const [, rate] = await priceFeed.latestRoundData();
 			// The amount of decimals the price should be adjusted for.
 			const decimals = await priceFeed.decimals();
 
-			// The currency number that will store the price feed. Can't be 0, which is reserve for ETH, or any other currency already set.
+			// The currency number that will store the price feed. Can't be 0, which is reserve for BNB, or any other currency already set.
 			const currency = incrementCurrencyFn();
 
 			await executeFn({

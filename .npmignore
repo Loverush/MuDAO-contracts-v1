@@ -2,8 +2,8 @@
 *
 
 # Allowlisted deployment networks.
-!/deployments/rinkeby/**
-!/deployments/mainnet/**
+!/deployments/bsc/**
+!/deployments/kovan/**
 
 # Contract abstract classes and interfaces.
 !/contracts/abstract/**

@@ -7,7 +7,7 @@
  Any configured ticket mods will get sent some of the printing reserved tickets at this time.
 */
 
-// The currency will be 0, which corresponds to ETH, preventing the need for currency price conversion.
+// The currency will be 0, which corresponds to BNB, preventing the need for currency price conversion.
 const currency = 0;
 
 export default [
