@@ -1,5 +1,5 @@
 {
-  "name": "@loverush/daohub-contracts-v1",
+  "name": "@dao-hub/contracts-v1",
   "bugs": {
     "url": "https://github.com/loverush/Daohub-contracts-v1/issues"
   },
@@ -7,7 +7,7 @@
     "type": "git",
     "url": "git+https://github.com/loverush/Daohub-contracts-v1.git"
   },
-  "version": "0.0.1",
+  "version": "0.0.2",
   "license": "MIT",
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "^2.0.2",
@@ -56,8 +56,5 @@
   "directories": {
     "test": "test"
   },
-  "author": "Roshan",
-  "publishConfig": {
-    "registry":"https://npm.pkg.github.com"
-  }
+  "author": "Roshan"
 }
