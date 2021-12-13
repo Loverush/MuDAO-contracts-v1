@@ -52,9 +52,5 @@
     "compile": "yarn clean && hardhat compile",
     "pretty": "prettier --write \"./**/*.{js,jsx,json}\""
   },
-  "main": "hardhat.config.js",
-  "directories": {
-    "test": "test"
-  },
   "author": "Roshan"
 }
