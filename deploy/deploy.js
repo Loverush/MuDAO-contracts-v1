@@ -137,32 +137,32 @@ async function main() {
 	]);
 	console.log('ProxyPaymentAddressManager: ', ProxyPaymentAddressManager.address);
 
-	await executeFn({
-		caller: deployer,
-		contract: TerminalV1,
-		fn: 'deploy',
-		args: [
-			multisig,
-			ethers.utils.formatBytes32String('Daohub'),
-			'',
-			{
-				target: ethers.constants.MaxUint256,
-				currency: 1,
-				// Duration must be zero so that the same cycle lasts throughout the tests.
-				duration: BigNumber.from(30),
-				cycleLimit: 0,
-				discountRate: BigNumber.from(200),
-				ballot: Ballot3Days.address, // 7tian todo
-			},
-			{
-				reservedRate: BigNumber.from(20),
-				bondingCurveRate: BigNumber.from(120),
-				reconfigurationBondingCurveRate: BigNumber.from(120),
-			},
-			[],
-			[],
-		],
-	});
+	// await executeFn({
+	// 	caller: deployer,
+	// 	contract: TerminalV1,
+	// 	fn: 'deploy',
+	// 	args: [
+	// 		multisig,
+	// 		ethers.utils.formatBytes32String('Daohub'),
+	// 		'',
+	// 		{
+	// 			target: ethers.constants.MaxUint256,
+	// 			currency: 1,
+	// 			// Duration must be zero so that the same cycle lasts throughout the tests.
+	// 			duration: BigNumber.from(30),
+	// 			cycleLimit: 0,
+	// 			discountRate: BigNumber.from(200),
+	// 			ballot: Ballot3Days.address, // 7tian todo
+	// 		},
+	// 		{
+	// 			reservedRate: BigNumber.from(20),
+	// 			bondingCurveRate: BigNumber.from(120),
+	// 			reconfigurationBondingCurveRate: BigNumber.from(120),
+	// 		},
+	// 		[],
+	// 		[],
+	// 	],
+	// });
 }
 
 main()

@@ -6,7 +6,7 @@ import takeFee from './take_fee';
 import transferProjectOwnership from './transfer_project_ownership';
 import withdraw from './withdraw';
 
-const contractName = 'ExampleJuiceboxProject';
+const contractName = 'ExampleDaoHubProject';
 
 export default function () {
 	// Before the tests, deploy the contract.

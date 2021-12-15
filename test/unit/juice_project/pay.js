@@ -25,7 +25,7 @@ const tests = {
 				memo: 'some-memo',
 				preferUnstakedTickets: true,
 				setup: { setTerminal: false, zeroProject: true },
-				revert: 'JuiceboxProject::pay: PROJECT_NOT_FOUND',
+				revert: 'DaoHubProject::pay: PROJECT_NOT_FOUND',
 			}),
 		},
 		{
@@ -36,7 +36,7 @@ const tests = {
 				memo: 'some-memo',
 				preferUnstakedTickets: true,
 				setup: { setTerminal: false },
-				revert: 'JuiceboxProject::pay: TERMINAL_NOT_FOUND',
+				revert: 'DaoHubProject::pay: TERMINAL_NOT_FOUND',
 			}),
 		},
 	],

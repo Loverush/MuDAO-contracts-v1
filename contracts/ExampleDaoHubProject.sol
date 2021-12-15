@@ -1,12 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.6;
 
-import './abstract/JuiceboxProject.sol';
+import './abstract/DaoHubProject.sol';
 
 /// @dev For testing purposes.
-contract ExampleJuiceboxProject is JuiceboxProject {
+contract ExampleDaoHubProject is DaoHubProject {
 	constructor(uint256 _projectId, ITerminalDirectory _terminalDirectory)
-		JuiceboxProject(_projectId, _terminalDirectory)
+		DaoHubProject(_projectId, _terminalDirectory)
 	{}
 
 	function takeFee(

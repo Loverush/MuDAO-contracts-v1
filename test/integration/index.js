@@ -105,7 +105,7 @@ export default function () {
 			fn: 'deploy',
 			args: [
 				this.deployer.address,
-				utils.formatBytes32String('juicebox'),
+				utils.formatBytes32String('DaoHub'),
 				'',
 				{
 					target: 0,
