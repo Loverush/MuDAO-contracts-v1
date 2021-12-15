@@ -10,7 +10,7 @@ import './ProxyPaymentAddress.sol';
 
 /** 
   @notice
-  Manages deploying proxy payment addresses for Juicebox projects.
+  Manages deploying proxy payment addresses for DaoHub projects.
 */
 contract ProxyPaymentAddressManager is IProxyPaymentAddressManager {
 	// --- private stored properties --- //

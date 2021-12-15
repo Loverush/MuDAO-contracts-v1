@@ -1,5 +1,5 @@
 /** 
- Projects can issue ERC-20 tickets that can be unstaked from the Juicebox contracts
+ Projects can issue ERC-20 tickets that can be unstaked from the DaoHub contracts
  and used throughout Web3.
 */
 

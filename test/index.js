@@ -12,7 +12,7 @@ import { BigNumber, Contract } from 'ethers';
 import unit from './unit';
 import integration from './integration';
 
-describe('Juicebox', async function () {
+describe('DaoHub', async function () {
 	before(async function () {
 		// Bind a reference to the deployer address and an array of other addresses to `this`.
 		[this.deployer, ...this.addrs] = await ethers.getSigners();

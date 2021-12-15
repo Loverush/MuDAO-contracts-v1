@@ -3,14 +3,14 @@ pragma solidity 0.8.6;
 
 import './interfaces/ITerminal.sol';
 import './interfaces/IPrices.sol';
-import './abstract/JuiceboxProject.sol';
+import './abstract/DaoHubProject.sol';
 
 /// Owner should eventually change to a multisig wallet contract.
-contract Governance is JuiceboxProject {
+contract Governance is DaoHubProject {
 	// --- external transactions --- //
 
 	constructor(uint256 _projectId, ITerminalDirectory _terminalDirectory)
-		JuiceboxProject(_projectId, _terminalDirectory)
+		DaoHubProject(_projectId, _terminalDirectory)
 	{}
 
 	/** 

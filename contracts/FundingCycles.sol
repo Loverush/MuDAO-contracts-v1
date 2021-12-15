@@ -199,7 +199,7 @@ contract FundingCycles is TerminalUtility, IFundingCycles {
 	// --- external transactions --- //
 
 	/** 
-      @param _terminalDirectory A directory of a project's current Juicebox terminal to receive payments in.
+      @param _terminalDirectory A directory of a project's current DaoHub terminal to receive payments in.
     */
 	constructor(ITerminalDirectory _terminalDirectory) TerminalUtility(_terminalDirectory) {}
 

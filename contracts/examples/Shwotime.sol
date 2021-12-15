@@ -4,7 +4,7 @@ pragma solidity 0.8.6;
 import '@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol';
 import '@paulrberg/contracts/math/PRBMath.sol';
 
-import '../abstract/JuiceboxProject.sol';
+import '../abstract/DaoHubProject.sol';
 
 /** 
   @dev 
@@ -13,7 +13,7 @@ import '../abstract/JuiceboxProject.sol';
 
   Not reliable for situations where networks dont entirely overlap.
 */
-contract Shwotime is JuiceboxProject {
+contract Shwotime is DaoHubProject {
 	using SafeERC20 for IERC20;
 
 	struct Tix {
@@ -40,7 +40,7 @@ contract Shwotime is JuiceboxProject {
 		ITerminalDirectory _terminalDirectory,
 		IERC20 _dai,
 		uint256 _fee
-	) JuiceboxProject(_projectId, _terminalDirectory) {
+	) DaoHubProject(_projectId, _terminalDirectory) {
 		dai = _dai;
 		fee = _fee;
 	}
@@ -116,7 +116,7 @@ contract Shwotime is JuiceboxProject {
 		uint256 _total = _tickets.price * _tickets.sold;
 		uint256 _collectable = PRBMath.mulDiv(_total, 200 - fee, 200);
 		dai.safeTransfer(msg.sender, _collectable);
-		//Take your fee into Juicebox.
+		//Take your fee into DaoHub.
 		_takeFee(_total - _collectable, msg.sender, _memo, false);
 	}
 }
