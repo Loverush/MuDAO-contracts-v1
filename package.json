@@ -7,7 +7,7 @@
     "type": "git",
     "url": "git+https://github.com/loverush/Daohub-contracts-v1.git"
   },
-  "version": "0.0.2",
+  "version": "0.0.4",
   "license": "MIT",
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "^2.0.2",
